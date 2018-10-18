@@ -2,6 +2,9 @@ package src.base;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class simpleTest {
 
     public static int mystrey(int a, int b){
@@ -54,6 +57,13 @@ public class simpleTest {
         System.out.println(1+2+3+4.0);
         System.out.println(4.1>=4);
         System.out.println(1+2+"3");
+    }
+
+
+    @Test
+    public void testSet(){
+        Set<String> set = new HashSet<>();
+//        set.retainAll()
     }
 
 }
