@@ -19,7 +19,7 @@ public class groupAnagrams_forty_nine {
             List<Map<String, Object>> tempMap = new ArrayList<>();
 
             for(String str : strs){
-                char [] chars = str.toCharArray();
+
             }
 
             return null;
