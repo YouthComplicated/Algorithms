@@ -16,7 +16,10 @@ public class FinalizeEscapeGC {
 
     }
 
+
     public static void main(String[] args) throws InterruptedException {
+
+
         SAVE_HOOK = new FinalizeEscapeGC();
 
         SAVE_HOOK = null;
@@ -42,8 +45,33 @@ public class FinalizeEscapeGC {
         }
 
 
+//        Student student = new Student();
+//        student = null;
+//        System.gc();
+//        Thread.sleep(500);
+//
+//        if(student != null){
+//            student.isAlive();
+//        }else{
+//            System.out.println(" not i am dead:");
+//        }
+
+
     }
 
+}
+class Student{
+    private String username;
+    private String sex;
 
+    public Student(){
+        this.username = "张三";
+        this.sex = "男";
+    }
+
+    public void isAlive(){
+        System.out.println("yes, i am still alive :)");
+    }
 
 }
+
