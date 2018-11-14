@@ -6,7 +6,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class simpleTest {
-
+    /**
+     * ???
+     * @param a
+     * @param b
+     * @return
+     */
     public static int mystrey(int a, int b){
         if(b == 0) return 0;
         if(b % 2 == 0) return mystrey(a+a, b/2);
@@ -29,8 +34,9 @@ public class simpleTest {
     @Test
     public void testDouble(){
         //Infinity 无穷大
-        System.out.println(Double.POSITIVE_INFINITY); // 1.0 / 0.0;
-        System.out.println(Double.NEGATIVE_INFINITY); // -1.0 / 0.0;
+        System.out.println(Double.POSITIVE_INFINITY); // 1.0 / 0.0;  Infinity
+        System.out.println(Double.NEGATIVE_INFINITY); // -1.0 / 0.0;  -Infinity
+
     }
 
 
@@ -57,6 +63,11 @@ public class simpleTest {
         System.out.println(1+2+3+4.0);
         System.out.println(4.1>=4);
         System.out.println(1+2+"3");
+
+
+        //System.out.println(1/0); //java.lang.ArithmeticException: / by zero
+        System.out.println(1.0/0.0);//Infinity
+
     }
 
 
