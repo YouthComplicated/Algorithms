@@ -73,6 +73,9 @@ public class simpleTest {
 
     @Test
     public void testPrintln(){
+        /**
+         * 字面量的值
+         */
         System.out.println('b');
         System.out.println('b'+'c');
         System.out.println((char)('a'+4));
@@ -92,8 +95,11 @@ public class simpleTest {
     @Test
     public void test2(){
         double t = 9.0;
-        while (Math.abs(t - 9.0)/t > .001){
+        System.out.println();
+        while (Math.abs(t - 9.0/t) > .001){
             t = (9.0/t + t) / 2.0;
+            System.out.println(t);
+            System.out.println("math:"+Math.abs(t - 9.0/t));
         }
         System.out.printf("%.5f\n", t);
     }
@@ -105,6 +111,7 @@ public class simpleTest {
             for (int j = 0; j < i; j++){
                 sum ++;
             }
+            System.out.println(sum);
         }
         System.out.println(sum);
     }
@@ -116,8 +123,33 @@ public class simpleTest {
             for (int j = 0; j < 1000; j++){
                 sum ++;
             }
+            System.out.println(sum);
         }
         System.out.println(sum);
     }
 
+
+    public static int  lg(int m){
+
+        int k = 0;
+        if(m >= 0){
+            int a = 1;
+            while (a <= m){
+                a *= 2;
+                k ++;
+            }
+        }else{
+            int a = 1;
+            while (a <= m){
+                a /= 2;
+                k --;
+            }
+        }
+        return k;
+    }
+
+    @Test
+    public void test5() {
+
+    }
 }
