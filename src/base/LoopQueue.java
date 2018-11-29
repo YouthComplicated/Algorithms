@@ -2,6 +2,10 @@ package base;
 
 import java.util.Arrays;
 
+/**
+ * 循环链表
+ * @param <E>
+ */
 public class LoopQueue<E> implements Queue<E>{
 
     private E[] data;
