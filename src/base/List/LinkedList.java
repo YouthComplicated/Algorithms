@@ -1,4 +1,4 @@
-package base;
+package base.List;
 
 public class LinkedList<E> {
 

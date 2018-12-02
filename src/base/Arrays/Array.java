@@ -1,4 +1,4 @@
-package base;
+package base.Arrays;
 
 public class Array<E> {
 

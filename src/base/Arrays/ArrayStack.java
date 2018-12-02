@@ -1,6 +1,6 @@
-package base;
+package base.Arrays;
 
-public class ArrayStack<E> implements Statck<E>{
+public class ArrayStack<E> implements ArrayQueue.Statck<E> {
 
     Array<E> array;
 

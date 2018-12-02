@@ -1,6 +1,8 @@
-package base;
+package base.Arrays;
 
-public class ArrayQueue<E> implements Queue<E>{
+import base.List.Queue;
+
+public class ArrayQueue<E> implements Queue<E> {
 
     Array<E> array;
 
@@ -48,5 +50,24 @@ public class ArrayQueue<E> implements Queue<E>{
         }
         res.append("] tail ");
         return res.toString();
+    }
+
+    public static interface Statck<E> {
+
+        //push
+        void push(E e);
+
+        //pop
+        E pop();
+
+        //peek
+        E peek();
+
+        //getSize
+        int getSize();
+
+        //isEmpty
+        boolean isEmpty();
+
     }
 }

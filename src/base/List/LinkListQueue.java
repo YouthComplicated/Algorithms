@@ -1,6 +1,6 @@
-package base;
+package base.List;
 
-public class LinkListQueue<E> implements Queue<E>{
+public class LinkListQueue<E> implements Queue<E> {
 
     private class Node{
        public E e;
@@ -58,6 +58,7 @@ public class LinkListQueue<E> implements Queue<E>{
             if(head == null){
                 tail = null;
             }
+            size --;
             return retNode.e;
         }
     }

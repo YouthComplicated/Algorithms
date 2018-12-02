@@ -1,6 +1,8 @@
-package base;
+package base.List;
 
-public class LinkListStack<E> implements Statck<E>{
+import base.Arrays.ArrayQueue;
+
+public class LinkListStack<E> implements ArrayQueue.Statck<E> {
 
     private LinkedList<E> list;
 
