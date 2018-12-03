@@ -1,4 +1,4 @@
-package src.jdk;
+package jdk;
 
 import org.junit.Test;
 
