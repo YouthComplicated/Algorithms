@@ -5,8 +5,7 @@ package Thread;
 public class ThreadDemo04 {
 
 	public static void main(String[] args) {
-		Thread thread = new Thread(new Runnable() {
-			public void run() {
+		Thread thread = new Thread(()-> {
 				while (true) {
 					try {
 						Thread.sleep(100);
@@ -16,7 +15,7 @@ public class ThreadDemo04 {
 					System.out.println("我是子线程....");
 				}
 			}
-		});
+		);
 		thread.setDaemon(true);
 		thread.start();
 		for (int i = 0; i < 10; i++) {

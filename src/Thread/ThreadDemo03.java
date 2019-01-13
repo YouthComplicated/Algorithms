@@ -11,16 +11,13 @@ public class ThreadDemo03 {
 
 	public static void main(String[] args) {
 		Person person = new Person() {
-
 			@Override
 			public void add() {
 				System.out.println("我是add方法");
-
 			}
 		};
 		person.add();
 		Thread thread = new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				// 线程需要执行的任务代码

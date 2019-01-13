@@ -2,7 +2,6 @@
 package Thread;
 
 class CreateThreadDemo02 implements Runnable {
-
 	@Override
 	public void run() {
 		// 具体的线程需要执行的任务
