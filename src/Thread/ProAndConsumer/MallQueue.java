@@ -10,8 +10,6 @@ public class MallQueue {
 
     private final int MAX_COUNT = 20;
 
-    private int signal;
-
     private Lock lock = new ReentrantLock();
     Condition proCon = lock.newCondition();
     Condition conCon = lock.newCondition();

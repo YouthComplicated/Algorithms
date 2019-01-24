@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Demo3 {
 
-private volatile int signal;
+	private volatile int signal;
 	
 	public synchronized void set () {
 		signal = 1;
@@ -14,7 +14,7 @@ private volatile int signal;
 		 */
 //		notify();
 		notifyAll();
-		System.out.println("叫醒线程叫醒之后休眠开始......");
+		System.out.println("set()叫醒线程叫醒之后休眠开始......");
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -24,7 +24,7 @@ private volatile int signal;
 	}
 	
 	public synchronized int get () {
-		System.out.println(Thread.currentThread().getName() + "方法执行...");
+		System.out.println(Thread.currentThread().getName() + "  get()方法执行...");
 		if(signal != 1) {
 			try {
 				//释放锁
@@ -34,7 +34,7 @@ private volatile int signal;
 				e.printStackTrace();
 			}
 		}
-		System.out.println(Thread.currentThread().getName() + "方法执行完毕...");
+		System.out.println(Thread.currentThread().getName() + "  get()方法执行完毕...");
 		return signal;
 	}
 	
@@ -48,6 +48,9 @@ private volatile int signal;
 		new Thread(t2).start();
 		new Thread(t2).start();
 		new Thread(t2).start();
+
+		new Thread(t1).start();
+		new Thread(t1).start();
 		
 		try {
 			TimeUnit.SECONDS.sleep(1);

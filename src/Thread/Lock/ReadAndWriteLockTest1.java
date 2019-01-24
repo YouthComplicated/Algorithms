@@ -17,6 +17,11 @@ public class ReadAndWriteLockTest1 {
 
     private volatile boolean isUpdate;
 
+    /**
+     * 读-读
+     * 读-写(互斥)
+     * 写-写(互斥)
+     */
     public void readWrite() {
         r.lock(); // 为了保证isUpdate能够拿到最新的值
         if (isUpdate) {

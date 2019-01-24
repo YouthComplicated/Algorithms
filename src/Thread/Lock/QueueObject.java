@@ -2,6 +2,9 @@ package Thread.Lock;
 
 public class QueueObject {
 
+	/**
+	 * 是否被叫醒
+	 */
 	private boolean isNotified = false;
 
 	public synchronized void doWait() throws InterruptedException {

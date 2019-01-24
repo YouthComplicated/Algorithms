@@ -100,8 +100,10 @@ class  User{
     private String name;
     /**
      * if this field is private  error:
-     * Caused by: java.lang.IllegalAccessException: Class Thread.Atomic.AtomicTest can not access a member of class Thread.Atomic.User with modifiers "private"
+     * Caused by: java.lang.IllegalAccessException: Class Thread.Atomic.AtomicTest can not access a member of class
+     * Thread.Atomic.User with modifiers "private"
      */
+
 //    private Integer age;
 
     public volatile  int age;

@@ -1,6 +1,9 @@
 package Thread.MultithreadCommunication;
 
 
+/**
+ * 借助volatile修饰信号量[标志位]和自旋实现线程之前通信
+ */
 public class Demo {
 	
 	private volatile int signal;
@@ -30,6 +33,10 @@ public class Demo {
 		new Thread(()->{
 			//等待signal为1开始执行，否则不能执行
 			while(d.get() != 1) {
+				/**
+				 * 不断的自旋浪费资源
+				 */
+				System.out.println("自旋-----");
 				try {
 					Thread.sleep(1500);
 				} catch (InterruptedException e) {

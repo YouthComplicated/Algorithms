@@ -4,6 +4,10 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 使用conditon代替wait-notify
+ * 指定叫醒的线程
+ */
 public class Demo2 {
     private int signal;
 
@@ -24,6 +28,7 @@ public class Demo2 {
         }
         System.out.println("a");
         signal ++;
+        //叫醒b线程
         b.signal();
         lock.unlock();
     }
@@ -61,10 +66,10 @@ public class Demo2 {
 
     public static void main(String[] args) {
 
-        Demo d = new Demo();
-        A a = new A(d);
-        B b = new B(d);
-        C c = new C(d);
+        Demo2 d = new Demo2();
+        A1 a = new A1(d);
+        B1 b = new B1(d);
+        C1 c = new C1(d);
 
         new Thread(a).start();
         new Thread(b).start();
@@ -75,9 +80,9 @@ public class Demo2 {
 
 class A1 implements Runnable {
 
-    private Demo demo;
+    private Demo2 demo;
 
-    public A1(Demo demo) {
+    public A1(Demo2 demo) {
         this.demo = demo;
     }
 
@@ -96,9 +101,9 @@ class A1 implements Runnable {
 }
 class B1 implements Runnable {
 
-    private Demo demo;
+    private Demo2 demo;
 
-    public B1(Demo demo) {
+    public B1(Demo2 demo) {
         this.demo = demo;
     }
 
@@ -117,9 +122,9 @@ class B1 implements Runnable {
 }
 class C1 implements Runnable {
 
-    private Demo demo;
+    private Demo2 demo;
 
-    public C1(Demo demo) {
+    public C1(Demo2 demo) {
         this.demo = demo;
     }
 

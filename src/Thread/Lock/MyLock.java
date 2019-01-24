@@ -19,6 +19,7 @@ public class MyLock implements Lock {
     public synchronized void lock() {
 //        if(isLock){
         Thread currentThread = Thread.currentThread();
+        //锁被别的线程拿到并且当前线程不是被锁住的线程则wait
         while (isLock && currentThread != lockThread){
             try {
                 wait();
@@ -48,7 +49,7 @@ public class MyLock implements Lock {
 
     @Override
     public synchronized void unlock() {
-        if(Thread.currentThread() == lockThread){ //
+        if(Thread.currentThread() == lockThread){
             lockCount --;
             if( lockCount == 0){
                 notify();

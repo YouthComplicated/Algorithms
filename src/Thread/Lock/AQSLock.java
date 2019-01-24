@@ -5,6 +5,9 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
+/**
+ * 基于AbstractQueuedSynchronizer 构造可重入锁
+ */
 public class AQSLock  implements  Lock {
 
     private Helper helper = new Helper();
