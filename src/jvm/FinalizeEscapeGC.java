@@ -48,7 +48,7 @@ public class FinalizeEscapeGC {
 //        Student student = new Student();
 //        student = null;
 //        System.gc();
-//        Thread.sleep(500);
+//        thread.sleep(500);
 //
 //        if(student != null){
 //            student.isAlive();

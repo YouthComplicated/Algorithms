@@ -1,0 +1,90 @@
+package thread;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * 简易连接池
+ */
+public class MyDataSource {
+
+	private LinkedList<Connection> pool = new LinkedList<>();
+
+	private static final int INIT_CONNECTIONS = 10;
+
+	private static final String DRIVER_CLASS = "";
+
+	private static final String USER = "";
+
+	private static final String PASSWORD = "";
+
+	private static final String URL = "";
+
+	private Lock lock = new ReentrantLock();
+	private Condition c1 = lock.newCondition();
+
+	static {
+		try {
+			Class.forName(DRIVER_CLASS);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 构造方法初始化连接
+	 */
+	public MyDataSource() {
+		for (int i = 0; i < INIT_CONNECTIONS; i++) {
+			try {
+				Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+				pool.addLast(conn);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// druid
+	public Connection getConnect() {
+		Connection result = null;
+		lock.lock();
+		try {
+			while (pool.size() <= 0) {
+				try {
+					c1.await();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			if (!pool.isEmpty()) {
+				result = pool.removeFirst();
+			}
+			return result;
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 *
+	 * @param conn
+	 */
+	public void release(Connection conn) {
+		if (conn != null) {
+			lock.lock();
+			try {
+				pool.addLast(conn);
+				c1.signal();
+			} finally {
+				lock.unlock();
+			}
+		}
+	}
+
+}
