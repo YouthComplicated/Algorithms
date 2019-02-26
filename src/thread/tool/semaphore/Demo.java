@@ -2,6 +2,7 @@ package thread.tool.semaphore;
 
 import java.util.concurrent.Semaphore;
 
+
 public class Demo {
 	
 	public void method (Semaphore semaphore) {
@@ -30,10 +31,7 @@ public class Demo {
 		Semaphore semaphore = new Semaphore(10);
 		
 		while(true) {
-			
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
+			new Thread(() -> {
 					d.method(semaphore);
 					try {
 						Thread.sleep(100);
@@ -41,7 +39,6 @@ public class Demo {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
 			}).start();
 		}
 		
