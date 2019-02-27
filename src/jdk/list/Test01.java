@@ -1,19 +1,18 @@
 package jdk.list;
 
 
-import base.Arrays.Array;
-import com.sun.media.sound.SoftTuning;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * @author NJ
  * @date 2019/2/26 17:49
  */
-public class test01 {
+public class Test01 {
 
 
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
@@ -54,7 +53,7 @@ public class test01 {
          * 泛型初始化，子类方法调用不到原因???
          */
         List<Integer> list1  = new ArrayList<>();
-        //list1.ensureCapacity();
+//        list1.ensureCapacity();
         for(int i = 0; i < 20; i++){
             list1.add(1);
             System.out.println(list1.size());
@@ -72,7 +71,9 @@ public class test01 {
 
     }
 
-
+    /**
+     * 进制转化问题 位运算
+     */
     @Test
     public void test03(){
         /**
@@ -168,6 +169,7 @@ public class test01 {
         myobjs.removeRange(3,1);
         System.out.println(myobjs);
 
+
     }
 
     class MyList<E> extends ArrayList<E>{
@@ -175,6 +177,31 @@ public class test01 {
         protected void removeRange(int fromIndex, int toIndex) {
             super.removeRange(fromIndex, toIndex);
         }
+
+        /**
+         * 内部类调用主类方法
+         */
+        public  void transfer(){
+            Test01.this.test01();
+        }
+    }
+
+    /**
+     * arrayList 迭代器
+     */
+    @Test
+    public void test07(){
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < 5; i++){
+            list.add(i);
+        }
+        System.out.println(list);
+        ListIterator<Integer> iterator =  list.listIterator();
+
+        while (iterator.hasPrevious()){
+            System.out.println(iterator.next());
+        }
+
     }
 
 
