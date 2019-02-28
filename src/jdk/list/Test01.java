@@ -1,13 +1,11 @@
 package jdk.list;
 
 
-import com.sun.media.sound.SoftTuning;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
 
 /**
  * @author NJ
@@ -232,11 +230,6 @@ public class Test01 {
         iterator2.add(8888);
         System.out.println("增加之后：" + list2);
 
-
-
-
-
-
     }
 
     /**
@@ -252,24 +245,111 @@ public class Test01 {
 
         List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
         System.out.println(list);
-        List<Integer> sub = list.subList(2,3);
+        List<Integer> sub = list.subList(0,6);
         System.out.println("sub:"+sub);
         System.out.println("list:"+list);
+        System.out.println("[sub == list]:"+(sub==list));
+        System.out.println("[sub equals list]:"+(sub.equals(list)));
         sub.clear();
         System.out.println("清除sub之后:"+list);
 
 
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(1);
+        list1.add(2);
+
+        //通过构造函数新建一个包含list1的列表 list2
+        List<Integer> list2 = new ArrayList<>(list1);
+
+        //通过subList生成一个与list1一样的列表 list3
+        List<Integer> list3 = list1.subList(0, list1.size());
+
+        //修改list3
+        list3.add(3);
+
+        System.out.println("list1 == list2：" + list1.equals(list2));
+        System.out.println("list1 == list3：" + list1.equals(list3));
 
 
+        /**
+         * subList生成子列表，尝试修改原列表异常:java.util.ConcurrentModificationException
+         */
+        List<Integer> list4 = new ArrayList<>(Arrays.asList(9,8,7,6,5,4));
+        List<Integer> list5 = list4.subList(0, list4.size());
 
-//        while(uulist.size() > 30){
-//            List<Ctuuid> subList = uulist.subList(0, 30);
-//            ctuuidMapper.batchInsert(subList);
-//            subList.clear();
-//        }
+        //read-only
+        list4 = Collections.unmodifiableList(list4);
+        list4.add(0);
 
+        System.out.println(list4.size());
+        System.out.println(list5.size());
 
+    }
 
+    /**
+     * 并行迭代器研究
+     * spliterator
+     */
+    @Test
+    public void test09(){
+        List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+        list.spliterator();
+        System.out.println(list);
+
+    }
+
+    private AtomicInteger count = new AtomicInteger(0);
+    private List<String> strList = createList();
+    private Spliterator spliterator = strList.spliterator();
+
+    /**
+     * 多线程计算list中数值的和
+     * 测试spliterator遍历
+     */
+    @Test
+    public void mytest() {
+        for (int i = 0; i < 4; i++) {
+            new Thread(() -> {
+                String threadName = Thread.currentThread().getName();
+                System.out.println("   " + threadName + " start ");
+                spliterator.trySplit().forEachRemaining((o) -> {
+                    if (isInteger((String) o)) {
+                        int num = Integer.parseInt(o + "");
+                        count.addAndGet(num);
+                        System.out.println("数值：" + num + "     " + threadName);
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                System.out.println("     " + threadName + " end");
+            }).start();
+        }
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("结果为：" + count);
+    }
+
+    private List<String> createList() {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            if (i % 10 == 0) {
+                result.add(i + "");
+            } else {
+                result.add("=");
+            }
+        }
+        return result;
+    }
+
+    public static boolean isInteger(String str) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        return pattern.matcher(str).matches();
     }
 
 }
