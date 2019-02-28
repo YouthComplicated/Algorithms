@@ -1,6 +1,7 @@
 package jdk.list;
 
 
+import com.sun.media.sound.SoftTuning;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -188,6 +189,9 @@ public class Test01 {
 
     /**
      * arrayList 迭代器
+     *
+     * ListIterator 只能用于遍历list集合
+     *
      */
     @Test
     public void test07(){
@@ -196,15 +200,77 @@ public class Test01 {
             list.add(i);
         }
         System.out.println(list);
-        ListIterator<Integer> iterator =  list.listIterator();
-
+        ListIterator<Integer> iterator = list.listIterator(5);
         while (iterator.hasPrevious()){
-            System.out.println(iterator.next());
+            System.out.println(iterator.previous());
         }
+
+        /**
+         * 删除元素
+         */
+        List<Integer> list1 = new ArrayList<>();
+        for(int i = 0; i < 5; i++){
+            list1.add(i+1);
+        }
+        System.out.println(list1);
+        ListIterator<Integer> iterator1 = list1.listIterator();
+
+//        while(iterator1.hasNext()){
+//            iterator1.next();
+//            iterator1.remove();
+//        }
+
+        iterator1.next();
+        iterator1.remove();
+        System.out.println(iterator1.previousIndex());
+        System.out.println("删除之后：" + list1);
+
+        List<Integer> list2 = new ArrayList<>(Arrays.asList(1,2,3,4,5));
+        ListIterator<Integer> iterator2 = list2.listIterator();
+        iterator2.add(999);
+        iterator2.next();
+        iterator2.add(8888);
+        System.out.println("增加之后：" + list2);
+
+
+
+
+
 
     }
 
+    /**
+     * subList 进行截断处理
+     * while(uulist.size() > 30){
+     * List<Ctuuid> subList = uulist.subList(0, 30);
+     * ctuuidMapper.batchInsert(subList);
+     * subList.clear();
+     * }
+     */
+    @Test
+    public void test08(){
 
+        List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+        System.out.println(list);
+        List<Integer> sub = list.subList(2,3);
+        System.out.println("sub:"+sub);
+        System.out.println("list:"+list);
+        sub.clear();
+        System.out.println("清除sub之后:"+list);
+
+
+
+
+
+//        while(uulist.size() > 30){
+//            List<Ctuuid> subList = uulist.subList(0, 30);
+//            ctuuidMapper.batchInsert(subList);
+//            subList.clear();
+//        }
+
+
+
+    }
 
 }
 
