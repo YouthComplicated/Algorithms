@@ -1,4 +1,4 @@
-package jdk.list;
+package jdk.collection.list;
 
 
 import org.junit.Test;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @author NJ
  * @date 2019/2/26 17:49
  */
-public class Test01 {
+public class TestArrayList {
 
 
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
@@ -86,15 +86,15 @@ public class Test01 {
     }
 
     /**
-     * List 转换数组
+     * List 转换数组 toArray() 使用
      */
     @Test
     public void test04(){
+
         List<Integer> list1  = new ArrayList<>();
         for(int i = 0; i < 5; i++){
             list1.add(i);
         }
-
         System.out.println(list1);
 
 //        Integer[] array = (Integer[]) list1.toArray();
@@ -120,6 +120,38 @@ public class Test01 {
 //
 //        List<Integer> integers = (List<Integer>) objects;
     }
+
+    /**
+     * 测试toArray使用
+     */
+    @Test
+    public void testToArr(){
+//        List list1 = new ArrayList();
+//        List list2 = new ArrayList<Integer>();
+//        list1.add(1);
+//        list1.add("bbb");
+//        list1.add(5L);
+//        System.out.println(list1);
+//        System.out.println(list1.toArray());
+//        //迭代器遍历数组
+//        Iterator iterator = list1.iterator();
+//        while(iterator.hasNext()){
+//            System.out.println(iterator.next());
+//        }
+//        //工具类的遍历
+//        System.out.println(Arrays.toString(list1.toArray()));
+
+        Collection con = new ArrayList();
+        con.add(1);
+        con.add(2);
+        con.add(3);
+
+        System.out.println(con.toArray());
+
+    }
+
+
+
 
     /**
      * addAll()
@@ -181,7 +213,7 @@ public class Test01 {
          * 内部类调用主类方法
          */
         public  void transfer(){
-            Test01.this.test01();
+            TestArrayList.this.test01();
         }
     }
 
@@ -287,7 +319,7 @@ public class Test01 {
     }
 
     /**
-     * 并行迭代器研究
+     * 并行迭代器研究 性能的分析，受约束的条件cpu等
      * spliterator
      */
     @Test
