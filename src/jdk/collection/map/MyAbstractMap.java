@@ -30,6 +30,14 @@ public class MyAbstractMap<K,V> extends AbstractMap<K,V> implements Map<K,V> {
         map.put("bb",2);
         map.put("cc",3);
         System.out.println(map);
+
+        //匿名内部类
+        Map<String, Object> abstractMap = new AbstractMap<String, Object>() {
+            @Override
+            public Set<Entry<String, Object>> entrySet() {
+                return null;
+            }
+        };
     }
 
 }
