@@ -1,4 +1,4 @@
-package jdksource;
+package jdk.jdk8.lambaTest.FunctionInterfaceTest;
 
 public class interfaceTest {
     /**
