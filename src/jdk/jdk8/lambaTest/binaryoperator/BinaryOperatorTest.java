@@ -1,6 +1,5 @@
 package jdk.jdk8.lambaTest.binaryoperator;
 
-import javax.sound.midi.Soundbank;
 import java.util.Comparator;
 import java.util.function.BinaryOperator;
 

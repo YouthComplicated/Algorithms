@@ -106,8 +106,8 @@ public class MethodReferenceTest {
         System.out.println(methodReferenceTest.getString(String::new));
         System.out.println(methodReferenceTest.getString2("hello", String::new));
 
-
     }
+
     @Test
     public void test05(){
 
