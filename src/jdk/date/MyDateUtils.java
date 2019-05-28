@@ -63,7 +63,12 @@ public class MyDateUtils {
     }
 
     public static void main(String[] args) {
-
+        //年月日
+        LocalDate localDate = LocalDate.of(2018,3,5);
+        System.out.println(localDate);
+        //时分秒
+        LocalTime localTime = LocalTime.now();
+        System.out.println(localTime);
     }
 
 }
