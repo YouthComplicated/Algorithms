@@ -32,14 +32,42 @@ public class NonDecreasingArray_665 {
         int [] nums6 = {-1,4,2,3};
         int [] nums7 = {2,3,3,2,4};
 
-//        System.out.println(noDecr.checkPossibility(nums1));
-//        System.out.println(noDecr.checkPossibility(nums2));
-//        System.out.println(noDecr.checkPossibility(nums3));
-//        System.out.println(noDecr.checkPossibility(nums4));
-//        System.out.println(noDecr.checkPossibility(nums5));
-//        System.out.println(noDecr.checkPossibility(nums6));
+        System.out.println(noDecr.checkPossibility(nums1));
+        System.out.println(noDecr.checkPossibility(nums2));
+        System.out.println(noDecr.checkPossibility(nums3));
+        System.out.println(noDecr.checkPossibility(nums4));
+        System.out.println(noDecr.checkPossibility(nums5));
+        System.out.println(noDecr.checkPossibility(nums6));
         System.out.println(noDecr.checkPossibility(nums7));
 
+    }
+
+
+    public boolean checkPossibility1(int[] nums) {
+        if(nums == null){
+            return false;
+        }
+        int i = 0;
+        for(int j = 0; j < nums.length - 1; j++){
+            if(nums[j] > nums[j+1]){
+                if(j+2 <= nums.length-1 && j - 1 >=0){
+                    // 2,3,4,2,3
+                    if(nums[j] > nums[j+2] && j+3 <= nums.length -1 ){
+                        return false;
+                    }
+                    if(nums[j-1] > nums[j+2]){
+                        return false;
+                    }
+                    i++;
+                }else{
+                    i++;
+                }
+            }
+            if(i > 1){
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -50,11 +78,13 @@ public class NonDecreasingArray_665 {
         int i = 0;
         for(int j = 0; j < nums.length - 1; j++){
             if(nums[j] > nums[j+1]){
-                if(j -1 >= 0 &&  nums[j-1] > nums[j+1] && j+1 < nums.length-1){
-                    return false;
-                }else{
-                    i++;
+                //移动nums[j+1] 往前移动
+                if(j - 1 >= 0 && nums[j-1] > nums[j+1]){
+                    if(j+2 <= nums.length-1 && nums[j+2] < nums[j]){
+                        return false;
+                    }
                 }
+                i++;
             }
             if(i > 1){
                 return false;
