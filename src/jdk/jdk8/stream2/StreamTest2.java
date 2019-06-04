@@ -10,19 +10,19 @@ public class StreamTest2 {
     public static void main(String[] args) {
         List<String> list = Arrays.asList("hello", "world", "hello world");
 
-        NullPointerException nullPointerException = new NullPointerException("my exception");
+        NullPointerException nullPointerException = new NullPointerException("my jdk.exception");
 
         try (Stream<String> stream = list.stream()) {
             stream.onClose(() -> {
                 System.out.println("aaa");
-//                throw new NullPointerException("first exception");
+//                throw new NullPointerException("first jdk.exception");
 //                throw nullPointerException;
-                throw new NullPointerException("first exception");
+                throw new NullPointerException("first jdk.exception");
             }).onClose(() -> {
                 System.out.println("bbb");
-//                throw new ArithmeticException("second exception");
+//                throw new ArithmeticException("second jdk.exception");
 //                throw nullPointerException;
-                throw new NullPointerException("second exception");
+                throw new NullPointerException("second jdk.exception");
             }).forEach(System.out::println);
         }
     }

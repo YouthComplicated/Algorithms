@@ -38,7 +38,7 @@ public class StopThread {
 			try {
 				Thread.sleep(300);
 			} catch (Exception e) {
-				// TODO: handle exception
+				// TODO: handle jdk.exception
 			}
 
 			System.out.println("main i:" + i);

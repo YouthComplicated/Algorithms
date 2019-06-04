@@ -12,7 +12,7 @@ public class ThreadDemo04 {
 					try {
 						Thread.sleep(100);
 					} catch (Exception e) {
-						// TODO: handle exception
+						// TODO: handle jdk.exception
 					}
 					System.out.println("我是子线程....");
 				}
@@ -24,7 +24,7 @@ public class ThreadDemo04 {
 			try {
 				Thread.sleep(100);
 			} catch (Exception e) {
-				// TODO: handle exception
+				// TODO: handle jdk.exception
 			}
 			System.out.println("我是主线程....i:"+i);
 		}
