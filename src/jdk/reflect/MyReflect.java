@@ -18,6 +18,9 @@ public class MyReflect {
 
     private static Class clazzA = Teacher.class;
 
+    /**
+     * 获取类实例的三种方式
+     */
     @Test
     public void test01(){
         Class clazz1 = null;

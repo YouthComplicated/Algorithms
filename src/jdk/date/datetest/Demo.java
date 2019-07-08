@@ -1,4 +1,4 @@
-package jdk.datetest;
+package jdk.date.datetest;
 
 import org.junit.Test;
 
