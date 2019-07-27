@@ -197,7 +197,8 @@ public class TestArrayList {
 //        myobjs.removeRange(-1,-2);
 
         System.out.println(myobjs);
-        myobjs.removeRange(3,1);
+//        myobjs.removeRange(3,1);
+        myobjs.removeRange(-1,-2);
         System.out.println(myobjs);
 
 
