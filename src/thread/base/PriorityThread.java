@@ -1,4 +1,4 @@
-package thread;
+package thread.base;
 
 
 class PriThread extends Thread{

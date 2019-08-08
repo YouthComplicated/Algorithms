@@ -1,5 +1,5 @@
 
-package thread;
+package thread.base;
 
 /**
  * 守护线程和普通线程的区别

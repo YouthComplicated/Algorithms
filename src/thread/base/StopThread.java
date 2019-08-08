@@ -1,5 +1,5 @@
 
-package thread;
+package thread.base;
 
 class StopDemoThread extends Thread {
 	volatile boolean flag = true;

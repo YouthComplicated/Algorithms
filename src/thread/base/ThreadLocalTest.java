@@ -1,6 +1,4 @@
-package thread;
-
-import java.util.function.Supplier;
+package thread.base;
 
 /**
  * todo 应用的那些场景

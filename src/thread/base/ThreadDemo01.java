@@ -1,5 +1,5 @@
 
-package thread;
+package thread.base;
 
 import org.junit.Test;
 

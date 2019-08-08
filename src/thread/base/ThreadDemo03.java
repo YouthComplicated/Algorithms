@@ -1,5 +1,5 @@
 
-package thread;
+package thread.base;
 
 abstract class Person {
 	abstract public void add();

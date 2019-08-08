@@ -1,5 +1,5 @@
 
-package thread;
+package thread.base;
 
 /**
  * 2.实现runlabel接口 重写run方法
