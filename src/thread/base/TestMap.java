@@ -8,6 +8,8 @@ import java.util.Map;
  *
  * 定时任务下(集群模式部署情况下的问题) 全局变量如何保持一致性
  *
+ *
+ *
  */
 public class TestMap {
 
@@ -17,6 +19,8 @@ public class TestMap {
         int groupId1 = 1;
         int groupId2 = 2;
         int groupId3 = 3;
+
+
         numMap.put("1_1",11);
 
         new Thread(()->{
@@ -24,11 +28,13 @@ public class TestMap {
                 numMap.put(groupId1 + "_1", 111);
             }
         }).start();
+
         new Thread(()->{
             if(!numMap.containsKey(groupId2+"_1")) {
                 numMap.put(groupId2 + "_1", 222);
             }
         }).start();
+
         new Thread(()->{
             if(!numMap.containsKey(groupId3+"_1")) {
                 numMap.put(groupId3 + "_1", 333);

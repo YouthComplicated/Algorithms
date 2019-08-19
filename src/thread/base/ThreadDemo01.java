@@ -49,6 +49,7 @@ public class ThreadDemo01 {
 		}
 		System.out.println("主线程执行完毕....");
 		// 创建的线程，为和主线程并行执行。
+
 	}
 
 	@Test
@@ -62,6 +63,17 @@ public class ThreadDemo01 {
 			System.out.println("main i=" + i);
 		}
 		System.out.println("主线程执行完毕....");
+
+	}
+
+	@Test
+	public void testCreateThread03(){
+
+		new Thread(()->{
+			System.out.println(111);
+		}).start();
+
+		new Thread(()-> System.out.println(444)).start();
 
 	}
 
