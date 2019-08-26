@@ -15,7 +15,6 @@ public class FunctionTest {
 
         System.out.println(test.compute(3, value -> value * value));
 
-
         System.out.println(test.convert(5, value -> value + "helloworld"));
 //
 //        System.out.println(test.method1(2));

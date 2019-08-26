@@ -2,13 +2,18 @@ package jdk.jdk8.lambaTest.FunctionInterfaceTest;
 
 public class interfaceDefaultTest {
 
+
+
     public static void main(String[] args) {
+
+
         apple a = new apple() {
             @Override
             public int getAppleNum(int i) {
                 return 0;
             }
         };
+
         a.getAppleNum(11);
         a.getColor();
         a.getWeight();
@@ -21,10 +26,12 @@ public class interfaceDefaultTest {
             System.out.println(x);
             return 111;
         };
-        b.getAppleNum(333);
+        int resultB = b.getAppleNum(333);
 
-
+        System.out.println("getAppleNum:"+resultB);
     }
+
+
 
     //@FunctionalInterface
     interface apple{

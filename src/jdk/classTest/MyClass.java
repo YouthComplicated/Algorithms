@@ -34,6 +34,7 @@ public class MyClass {
 
         String clazzStr = clazz.toString();
         System.out.println(clazzStr);
+        printLine();
 
         /**
          * 1、order
@@ -172,7 +173,7 @@ public class MyClass {
         System.out.println(Arrays.toString(clazzs));
 
 
-
+        System.out.println(student.getClass() ==  Student.class);
 
 
     }

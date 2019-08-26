@@ -2,11 +2,22 @@ package jdk.jdk8.lambaTest.filter;
 
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class PersonTest {
+
+
+    static void printLine(String ... args){
+        if(args.length > 0){
+            System.out.println("===============" + args[0]);
+        }else{
+            System.out.println("===============");
+        }
+
+    }
 
     public static void main(String[] args) {
 
@@ -18,27 +29,36 @@ public class PersonTest {
 
         PersonTest test = new PersonTest();
 
-//        List<Person> personResult = test.getPersonsByUsername("zhangsan", persons);
-//        personResult.forEach(person -> System.out.println(person.getUsername()));
-
-//        List<Person> personResult = test.getPersonsByAge(20, persons);
-//        personResult.forEach(person -> System.out.println(person.getAge()));
+        printLine("getPersonsByUsername");
+        List<Person> personResult1 = test.getPersonsByUsername("zhangsan", persons);
+        personResult1.forEach(person -> System.out.println(person.getUsername()));
 
 
-        List<Person> personResult = test.getPersonsByAge2(20, persons, (age, personList) -> {
-            return personList.stream().filter(person -> person.getAge() > age).collect(Collectors.toList());
-        });
-
-        personResult.forEach(person -> System.out.println(person.getAge()));
-
-        System.out.println("--------------------");
-
-        List<Person> personResult2 = test.getPersonsByAge2(20, persons, (age, personList) -> {
-            return personList.stream().filter(person -> person.getAge() <= age).collect(Collectors.toList());
-        });
-
+        printLine("getPersonsByAge");
+        List<Person> personResult2 = test.getPersonsByAge(20, persons);
         personResult2.forEach(person -> System.out.println(person.getAge()));
 
+
+        printLine("getPersonsByAge2");
+        List<Person> personResult3 = test.getPersonsByAge2(20, persons, (age, personList) ->
+             personList.stream().filter(person -> person.getAge() > age).
+                     collect(Collectors.toList())
+        );
+        personResult3.forEach(person -> System.out.println(person.getAge()));
+
+
+        printLine("getPersonsByAge2");
+        List<Person> personResult4 = test.getPersonsByAge2(20, persons, (age, personList) ->
+                personList.stream().filter(person -> person.getAge() <= age).collect(Collectors.toList())
+        );
+        personResult4.forEach(person -> System.out.println(person.getAge()));
+
+
+        printLine("getStringName");
+        Person person5 = test.getStringName(null,persons, (name, personList)->
+                personList.stream().filter(person -> person.getUsername().equals(name))
+                        .collect(Collectors.toList()).get(0));
+        System.out.println(person5.toString());
 
     }
 
@@ -54,16 +74,26 @@ public class PersonTest {
     }
 
     public List<Person> getPersonsByAge(int age, List<Person> persons) {
-        BiFunction<Integer, List<Person>, List<Person>> biFunction = (ageOfPerson, personList) -> {
-            return personList.stream().filter(person -> person.getAge() > ageOfPerson).collect(Collectors.toList());
-        };
+
+        BiFunction<Integer, List<Person>, List<Person>> biFunction =
+            (ageOfPerson, personList) -> personList.stream().filter(person -> person.getAge() > ageOfPerson).collect(Collectors.toList());
 
         return biFunction.apply(age, persons);
     }
 
-    public List<Person> getPersonsByAge2(int age, List<Person> persons, BiFunction<Integer, List<Person>, List<Person>> biFunction) {
+    public List<Person> getPersonsByAge2(int age, List<Person> persons,
+                                         BiFunction<Integer, List<Person>, List<Person>> biFunction) {
         return biFunction.apply(age, persons);
     }
+
+
+    public Person getStringName(String name, List<Person> personList, BiFunction<String, List<Person>, Person> biFunction){
+
+        return biFunction.apply(name, personList);
+    }
+
+
+
 
 
 

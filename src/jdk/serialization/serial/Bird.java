@@ -1,6 +1,5 @@
 package jdk.serialization.serial;
 
-import java.beans.Transient;
 import java.io.Serializable;
 
 public class Bird implements Serializable {

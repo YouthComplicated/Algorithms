@@ -19,6 +19,7 @@ public class StreamTest {
 
         //可变形参 -> stream
         Stream stream1 = Stream.of("hello", "world", "hello world");
+        System.out.println(stream1);
 
         //array -> stream
         String[] myArray = new String[]{"hello", "world", "hello world"};

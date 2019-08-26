@@ -12,7 +12,6 @@ import java.util.function.Supplier;
 import static java.util.Arrays.*;
 
 
-
 /**
   * @Description:  方法引用
   * @Author: NJ
@@ -38,9 +37,6 @@ public class MethodReferenceTest {
 
     List<Student> students = asList(student1, student2, student3, student4);
 
-    public static void main(String[] args) {
-
-    }
 
     /**
      * 类名::静态方法  它与  类名.静态方法 本质上有区别
