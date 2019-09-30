@@ -1,7 +1,4 @@
-package jdk.asm;
-
-
-
+package jdk.byteCode.asm;
 
 
 import org.objectweb.asm.ClassReader;
@@ -10,7 +7,6 @@ import org.objectweb.asm.ClassWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 
 public class Generator {
 

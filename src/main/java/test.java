@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author NJ
@@ -32,6 +33,18 @@ public class test {
         Map<String, Object> map = new HashMap<>();
         map.put("aa",111);
         System.out.println(map);
+    }
+
+    @Test
+    public void test03(){
+        String OS, ARCH;
+        Properties props = System.getProperties();
+        OS = String.valueOf(props.get("os.name")).toLowerCase();
+        ARCH = String.valueOf(props.get("sun.arch.data.model"));
+
+        System.out.println("OS:"+OS);
+        System.out.println("ARCH:"+ARCH);
+
     }
 
 }

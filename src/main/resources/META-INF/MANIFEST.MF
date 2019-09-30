@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Agent-Class: jdk.byteCode.javassist.TestAgent
+Created-By: tomscott
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Boot-Class-Path: javassist.3.25.0-GA.jar
