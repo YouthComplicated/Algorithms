@@ -11,14 +11,16 @@ import java.util.Properties;
 public class test {
 
     public static void main(String[] args) {
-        for(int i = 0; i< 3; i++){
-            if( i == 1){
-                if(true){
-                    continue;
-                }
-            }
-            System.out.println(i);
-        }
+//        for(int i = 0; i< 3; i++){
+//            if( i == 1){
+//                if(true){
+//                    continue;
+//                }
+//            }
+//            System.out.println(i);
+//        }
+
+
     }
 
     @Test
@@ -46,5 +48,30 @@ public class test {
         System.out.println("ARCH:"+ARCH);
 
     }
+
+    @Test
+    public void test04(){
+        StringBuilder sb = new StringBuilder("");
+        for(int i = 1; i < 10; i++){
+            sb.append("N00").append(i).append(";");
+        }
+        System.out.println(sb.toString());
+        for(int i = 10; i < 20; i++){
+            sb.append("N0").append(i).append(";");
+        }
+        System.out.println(sb.toString());
+        for(int i = 30; i < 40; i++){
+            sb.append("N0").append(i).append(";");
+        }
+        System.out.println(sb.toString());
+        for(int i = 40; i < 50; i++){
+            sb.append("N0").append(i).append(";");
+        }
+        System.out.println(sb.toString());
+//        for(int i = 10; i < 20; i++){
+//            sb.append("N000").append(i).append(";");
+//        }
+    }
+
 
 }

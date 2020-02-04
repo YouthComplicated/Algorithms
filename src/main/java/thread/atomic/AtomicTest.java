@@ -95,6 +95,8 @@ public class AtomicTest {
 
     }
 }
+
+
 class  User{
 
     private String name;
