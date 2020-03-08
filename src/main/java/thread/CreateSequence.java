@@ -1,6 +1,8 @@
 package thread;
 
 public class CreateSequence {
+
+
     private int value;
     /**
      * synchronized 放在普通方法上，内置锁就是当前类的实例

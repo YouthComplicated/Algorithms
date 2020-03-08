@@ -1,5 +1,6 @@
 package thread.atomic;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
@@ -11,6 +12,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * 原子更新数组
  * 原子更新抽象类型
  * 原子更新字段
+ *
+ *
+ * 底层cas
  */
 public class AtomicTest {
 
@@ -19,6 +23,7 @@ public class AtomicTest {
     private AtomicInteger atoValue = new AtomicInteger(0);
 
     private int []  array = {1,2,3};
+
     private AtomicIntegerArray atomicIntegerArray = new AtomicIntegerArray(array);
 
     /**
@@ -28,6 +33,7 @@ public class AtomicTest {
 
     AtomicIntegerFieldUpdater<User> updater =  AtomicIntegerFieldUpdater.newUpdater(User.class,"age");
 
+    static AtomicReference<Integer> atomicRef = new AtomicReference<>();
 
     public int getNext(){
         atomicIntegerArray.addAndGet(2,3);
@@ -41,7 +47,21 @@ public class AtomicTest {
     }
 
 
+    /**
+     * 时间戳维度控制过程
+     * @param args
+     */
+
+
     public static void main(String[] args) {
+
+
+
+
+
+
+
+
 
 //        System.out.println(user.getAndIncrement(user));
 //        System.out.println(user.getAndIncrement(user));
