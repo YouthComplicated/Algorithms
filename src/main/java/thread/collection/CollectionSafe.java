@@ -1,4 +1,4 @@
-package thread.base;
+package thread.collection;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -17,7 +17,7 @@ public class CollectionSafe {
      * 再将原容器的引用指向新的容器 setArray(newElements);
      * 这样的好处是可以对copyOnWrite容器进行并发的读,而不需要加锁 因为当前容器不会添加任何容器.所以copyOnwrite容器也是一种
      * 读写分离的思想,读和写不同的容器.
-     *          public boolean add(E e) {
+     *     public boolean add(E e) {
      *         final ReentrantLock lock = this.lock;
      *         lock.lock();
      *         try {

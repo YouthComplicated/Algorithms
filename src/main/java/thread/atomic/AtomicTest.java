@@ -1,18 +1,33 @@
 package thread.atomic;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicIntegerArray;
-import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.*;
 
 /**
- * 原子类操作：
- * 原子更新基本类型
- * 原子更新数组
- * 原子更新抽象类型
- * 原子更新字段
  *
+ * 原子类操作：
+ * 原子更新基本类型(没有byte,short,float,char)
+ *      AtomicBoolean AtomicInteger AtomicLong
+ *
+ * 原子更新数组
+ *      AtomicIntegerArray  AtomicXXXArray
+ *
+ * 原子更新抽象类型
+ *      AtomicReference
+ *
+ * 原子更新字段
+ *     AtomicIntegerFiledUpdater
+ *
+ *     AtomicXXX
+ *     AtomicXXXArray
+ *     AtomicXXXFieldUpdater
+ *
+ * 时间戳
+ *     AtomicStampedReference
+ *
+ * 特殊 DoubleAccumulator DoubleAdder  LongXXX LongXXX  Striped64
+ *
+ *     AtomicMarkableReference 是否更改过 boolean
  *
  * 底层cas
  */
@@ -55,14 +70,6 @@ public class AtomicTest {
 
     public static void main(String[] args) {
 
-
-
-
-
-
-
-
-
 //        System.out.println(user.getAndIncrement(user));
 //        System.out.println(user.getAndIncrement(user));
 
@@ -72,16 +79,17 @@ public class AtomicTest {
 //			System.out.println(s.getNext());
 //		}
 
-        new Thread(()->{
-            while(true) {
-                System.out.println(Thread.currentThread().getName() + " " + s.getNext());
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+
+//        new Thread(()->{
+//            while(true) {
+//                System.out.println(Thread.currentThread().getName() + " " + s.getNext());
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
 
 
 //        new thread(new Runnable() {
@@ -111,6 +119,43 @@ public class AtomicTest {
 //                }
 //            }
 //        }).start();
+
+
+
+        User user = new User("张三", 12);
+        AtomicMarkableReference<User> markRef = new AtomicMarkableReference<>(user, false);
+        User updateUser = new User("张三",23);
+
+        new Thread(()->{
+            System.out.println(Thread.currentThread().getName()+"：初始值：" +
+                   user+ "初始标记："+ false );
+            if(markRef.compareAndSet(user,updateUser,markRef.isMarked(),Boolean.TRUE)){
+                System.out.println("A修改成功！成功之后的值："+ markRef.getReference());
+            }else{
+                System.out.println("B修改失败！");
+            }
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        },"A").start();
+
+        User user1 = new User("张三", 12);
+        new Thread(()->{
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName()+"：初始值：" +
+                    markRef.getReference()+ "初始标记："+ markRef.isMarked() );
+            markRef.compareAndSet(markRef.getReference(),user1,markRef.isMarked(), Boolean.TRUE);
+            System.out.println(Thread.currentThread().getName()+"：修改之后的值：" +markRef.getReference()+"初始标记："+ markRef.isMarked());
+        },"B").start();
+
+
+
 
 
     }

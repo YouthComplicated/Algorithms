@@ -1,6 +1,5 @@
-package thread.base;
+package thread.base.volatileTest;
 
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -31,7 +30,7 @@ public class VolatileTest {
 
 
     AtomicInteger f = new AtomicInteger(0);
-    public  void addFValue(){
+    public void addFValue(){
         f.getAndIncrement();
     }
 
@@ -84,14 +83,19 @@ public class VolatileTest {
          */
         VolatileTest volatileTest = new VolatileTest();
 
-        new Thread(()->{
-            volatileTest.method01();
-
-        }).start();
+//        new Thread(()->{
+//            volatileTest.method01();
+//
+//        }).start();
         new Thread(()->{
             volatileTest.method02();
 
         }).start();
+        new Thread(()->{
+            volatileTest.method01();
+
+        }).start();
+
         new Thread(()->{
             volatileTest.method02();
 

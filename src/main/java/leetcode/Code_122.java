@@ -35,16 +35,13 @@ public class Code_122 {
      */
 
     public static int maxProfit(int[] prices) {
-        int max = 0;
-        if(prices == null){
+        int max = 0, temp;
+        if(prices == null || prices.length <= 1){
             return max;
         }
-        int temp;
-        for(int i = 0; i < prices.length - 1; i++){
-            if(prices[i] < prices[i+1]){
-                max = max + prices[i+1] - prices[i];
-                i += 1;
-            }
+        for (int i = 1; i < prices.length; i++) {
+            temp = prices[i] - prices[i-1];
+            max = max + (temp > 0 ? temp : 0);
         }
         return  max;
     }

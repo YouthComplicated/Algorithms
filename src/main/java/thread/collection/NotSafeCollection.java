@@ -1,16 +1,11 @@
-package thread.base;
+package thread.collection;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
- * @auther zzyy
- * @create 2019-03-24 21:43
  *
  * 1 故障现象
  *  java.util.ConcurrentModificationException
@@ -24,13 +19,39 @@ import java.util.concurrent.CopyOnWriteArraySet;
  *
  *
  * 4 优化建议(同样的错误不犯第2次)
-
  *
+ *
+ * 写时复制 copyOnWrite 容器即写时复制的容器 往容器添加元素的时候,不直接往当前容器object[]添加,而是先将当前容器object[]进行
+ * copy 复制出一个新的object[] newElements 然后向新容器object[] newElements 里面添加元素 添加元素后,
+ * 再将原容器的引用指向新的容器 setArray(newElements);
+ * 这样的好处是可以对copyOnWrite容器进行并发的读,而不需要加锁 因为当前容器不会添加任何容器.所以copyOnwrite容器也是一种
+ * 读写分离的思想,读和写不同的容器.
+ *     public boolean add(E e) {
+ *         final ReentrantLock lock = this.lock;
+ *         lock.lock();
+ *         try {
+ *             Object[] elements = getArray();
+ *             int len = elements.length;
+ *             Object[] newElements = Arrays.copyOf(elements, len + 1);
+ *             newElements[len] = e;
+ *             setArray(newElements);
+ *             return true;
+ *         } finally {
+ *             lock.unlock();
+ *         }
+ *     }
  */
-public class NotSafeDemo03
+public class NotSafeCollection
 {
     public static void main(String[] args)
     {
+
+        safeMap();
+
+    }
+
+
+    public static void safeMap(){
         Map<String,String> map = new ConcurrentHashMap<>();
         for (int i = 1; i <=30; i++)
         {
