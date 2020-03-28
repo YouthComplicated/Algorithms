@@ -1,5 +1,6 @@
 package thread.locktype;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 /**
@@ -8,8 +9,6 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
  * CLHLock 和 MCSLock
  * 都是基于链表，不同的是CLHLock是基于隐式链表，没有真正的后续节点属性，MCSLock是显示链表，有一个指向后续节点的属性。
  * 将获取锁的线程状态借助节点(node)保存,每个线程都有一份独立的节点，这样就解决了TicketLock多处理器缓存同步的问题。
- *
- *
  *
  *
  * @author: nj
@@ -27,9 +26,11 @@ public class MCSLock {
     }
 
     private static final ThreadLocal<MCSNode> NODE = new ThreadLocal<>();
+
     // 队列
     @SuppressWarnings("unused")
     private volatile MCSNode queue;
+
     // queue更新器
     private static final AtomicReferenceFieldUpdater<MCSLock, MCSNode> UPDATER =
             AtomicReferenceFieldUpdater.newUpdater(MCSLock.class, MCSNode.class, "queue");
@@ -48,10 +49,20 @@ public class MCSLock {
             preNode.next = currentNode;
             // 循环判断，直到当前节点的锁标志位为false
             while (currentNode.isLocked) {
+
             }
         }
     }
 
+    /**
+     *
+     * AA  preNode == null  currentNode = NodeAA
+     *
+     * BB  preNode == NodeAA   preNode.next = NodeBB
+     *
+     * CC  preNode == NodeBB   preNode.next = NodeCC
+     *
+     */
     public void unlock() {
         MCSNode currentNode = NODE.get();
         // next为null表示没有正在等待获取锁的线程
@@ -64,6 +75,7 @@ public class MCSLock {
                 // 如果不成功，表示queue!=currentNode,即当前节点后面多了一个节点，表示有线程在等待
                 // 如果当前节点的后续节点为null，则需要等待其不为null（参考加锁方法）
                 while (currentNode.next == null) {
+
                 }
             }
         } else {
@@ -72,4 +84,37 @@ public class MCSLock {
             currentNode.next = null;
         }
     }
+
+
+    private static void test(){
+        System.out.println(Thread.currentThread().getName()+":come in");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args) {
+
+        MCSLock lock = new MCSLock();
+        new Thread(()->{
+            lock.lock();
+            test();
+            lock.unlock();
+        },"AA").start();
+
+
+        new Thread(()->{
+            lock.lock();
+            test();
+            lock.unlock();
+        },"BB").start();
+
+        new Thread(()->{
+            lock.lock();
+            test();
+            lock.unlock();
+        },"CC").start();
+    }
+
 }

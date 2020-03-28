@@ -13,11 +13,11 @@ class MyCaChe {
      * 保证可见性
      */
     private volatile Map<String, Object> map = new HashMap<>();
+
     private ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
 
     /**
      * 写
-     *
      * @param key
      * @param value
      */
@@ -70,8 +70,7 @@ class MyCaChe {
  * Description:
  * 多个线程同时操作 一个资源类没有任何问题 所以为了满足并发量
  * 读取共享资源应该可以同时进行
- * 但是
- * 如果有一个线程想去写共享资源来  就不应该有其他线程可以对资源进行读或写
+ * 但是如果有一个线程想去写共享资源来  就不应该有其他线程可以对资源进行读或写
  * <p>
  * 小总结:
  * 读 读能共存

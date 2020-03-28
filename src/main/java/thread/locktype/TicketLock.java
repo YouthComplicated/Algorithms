@@ -1,5 +1,6 @@
 package thread.locktype;
 
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -28,8 +29,9 @@ public class TicketLock {
 
     public int lock(){
         int currTicketNum = ticketNum.getAndIncrement();
+        System.out.println(Thread.currentThread().getName()+"-ticketNum:" + currTicketNum);
         while(currTicketNum != serviceNum.get()){
-
+//            System.out.println(Thread.currentThread().getName()+" 排队等待。。。");
         }
         return currTicketNum;
     }
@@ -41,7 +43,12 @@ public class TicketLock {
 
     public static void main(String[] args) {
 
+        /**
+         * 一把锁，锁住相当多的线程
+         */
         TicketLock ticketLock = new TicketLock();
+
+
         new Thread(()->{
             int lock = ticketLock.lock();
             try{

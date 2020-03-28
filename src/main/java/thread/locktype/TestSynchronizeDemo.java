@@ -37,7 +37,7 @@ class Phone implements Runnable {
     public static synchronized void sendEmail1()throws Exception {
 //        TimeUnit.SECONDS.sleep(2);
         System.out.println("ThreadName:"+Thread.currentThread().getName()+":*****sendEmail");
-        TimeUnit.SECONDS.sleep(4);
+        TimeUnit.SECONDS.sleep(2);
         sendSMS1();
     }
 
@@ -175,8 +175,28 @@ public class TestSynchronizeDemo {
          * 6 两个静态同步方法，2部手机，请问先打印邮件还是短信
          *
          *
-         * 静态同步方法，锁住的是类对象，与对象无关，静态同步方法的话，
+         * 静态同步方法，锁住的是类对象，与对象无关
          * 所有现场争夺同一把锁
+         *
+         *
+         * 结论:静态同步方法与对象无关，实际争夺的是一把锁
+         *
+         * 问题: 争夺的顺序好像有序， 类似压栈和堆栈，可以考虑使用线程池进行调用会出现什么情况
+         *
+         * 先调用phone1的方法,然后是phone2的方法，最后是phone1  永远有序为什么？
+         *
+         * ThreadName:A:*****sendEmail
+         * ThreadName:A:*****sendSMS
+         * ThreadName:C1:*****sendEmail
+         * ThreadName:C1:*****sendSMS
+         * ThreadName:C:*****sendEmail
+         * ThreadName:C:*****sendSMS
+         * ThreadName:B2:*****sendEmail
+         * ThreadName:B2:*****sendSMS
+         * ThreadName:B1:*****sendEmail
+         * ThreadName:B1:*****sendSMS
+         * ThreadName:B:*****sendEmail
+         * ThreadName:B:*****sendSMS
          *
          */
 //        test03();
@@ -189,9 +209,11 @@ public class TestSynchronizeDemo {
          *
          * 》》静态同步方法不能调用普通同步方法 不必进行测试
          *
-         * 》》普通同步方法调用静态方法 (同一个对象，不同对象等)
          *
          * 8 1个静态同步方法,1个普通同步方法,2部手机，请问先打印邮件还是短信
+         *
+         *
+         * 两部手机，静态同步方法争抢同一把锁
          *
          *
          */
@@ -217,7 +239,7 @@ public class TestSynchronizeDemo {
         /**
          * 两个不同的对象 互不干涉
          */
-        test07();
+//        test07();
 
 
 
@@ -297,6 +319,22 @@ public class TestSynchronizeDemo {
             }
         },"B").start();
 
+        new Thread(()->{
+            try {
+                phone1.sendEmail1();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        },"B1").start();
+
+        new Thread(()->{
+            try {
+                phone1.sendEmail1();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        },"B2").start();
+
 
         new Thread(()->{
             try {
@@ -305,6 +343,14 @@ public class TestSynchronizeDemo {
                 e.printStackTrace();
             }
         },"C").start();
+
+        new Thread(()->{
+            try {
+                phone2.sendEmail1();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        },"C1").start();
 
     }
 
@@ -361,6 +407,15 @@ public class TestSynchronizeDemo {
                 e.printStackTrace();
             }
         },"C").start();
+
+
+        new Thread(()->{
+            try {
+                phone1.sendEmail3();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        },"D").start();
 
     }
 
