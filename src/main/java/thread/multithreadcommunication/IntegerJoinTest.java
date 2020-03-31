@@ -1,4 +1,4 @@
-package thread.lockop;
+package thread.multithreadcommunication;
 
 import org.junit.Test;
 
@@ -6,9 +6,9 @@ import org.junit.Test;
 /**
  * join的错误用法
  */
-public class IntegerTest {
+public class IntegerJoinTest {
 
-    static Integer i=0;
+    static Integer i = 0;
     public static class AddThread extends Thread{
         @Override
         public void run(){

@@ -14,9 +14,15 @@ public class CountDownLatchTest {
         /**
          * 聚会吃饭案例
          */
-        party();
+//        party();
 
 
+        destroyWorld();
+
+    }
+
+
+    private static void destroyWorld() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(6);
         for (int i = 1; i <= 6; i++) {
             new Thread(() -> {
@@ -26,7 +32,6 @@ public class CountDownLatchTest {
         }
         countDownLatch.await();
         System.out.println("秦统一");
-
     }
 
     private static void party() throws InterruptedException {

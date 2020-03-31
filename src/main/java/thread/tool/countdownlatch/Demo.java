@@ -15,12 +15,14 @@ public class Demo {
 	}
 
 	public void calc(String line, int index) {
-		String[] nus = line.split(","); // 切分出每个值
+		// 切分出每个值
+		String[] nus = line.split(",");
 		int total = 0;
 		for (String num : nus) {
 			total += Integer.parseInt(num);
 		}
-		nums[index] = total; // 把计算的结果放到数组中指定的位置
+		// 把计算的结果放到数组中指定的位置
+		nums[index] = total;
 		System.out.println(Thread.currentThread().getName() + " 执行计算任务... " + line + " 结果为：" + total);
 	}
 

@@ -2,9 +2,9 @@ package thread.multithreadcommunication;
 
 public class Target1 implements Runnable {
 	
-	private Demo3 demo;
+	private WaitTest1 demo;
 	
-	public Target1(Demo3 demo) {
+	public Target1(WaitTest1 demo) {
 		this.demo = demo;
 	}
 

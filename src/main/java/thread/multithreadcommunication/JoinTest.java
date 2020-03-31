@@ -1,4 +1,4 @@
-package thread.base;
+package thread.multithreadcommunication;
 
 public class JoinTest {
 
@@ -26,20 +26,12 @@ public class JoinTest {
     public static void main(String[] args) {
         JoinTest demo = new JoinTest();
 
-
-        Thread joinThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                demo.b();
-            }
+        Thread joinThread = new Thread(() -> {
+            demo.b();
         });
 
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                demo.a(joinThread);
-            }
+        new Thread(() -> {
+            demo.a(joinThread);
         }).start();
     }
 }

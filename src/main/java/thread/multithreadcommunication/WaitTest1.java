@@ -1,8 +1,7 @@
 package thread.multithreadcommunication;
 
-import java.util.concurrent.TimeUnit;
 
-public class Demo3 {
+public class WaitTest1 {
 
 	private volatile int signal;
 	
@@ -14,6 +13,7 @@ public class Demo3 {
 		 */
 //		notify();
 		notifyAll();
+
 		System.out.println("set()叫醒线程叫醒之后休眠开始......");
 		try {
 			Thread.sleep(3000);
@@ -39,26 +39,30 @@ public class Demo3 {
 	}
 	
 	public static void main(String[] args) {
-		
-		Demo3 d = new Demo3();
+
+		WaitTest1 d = new WaitTest1();
+
+		//调用set方法
 		Target1 t1 = new Target1(d);
+		//调用get方法
 		Target2 t2 = new Target2(d);
-		
 		new Thread(t2).start();
 		new Thread(t2).start();
 		new Thread(t2).start();
 		new Thread(t2).start();
 
 		new Thread(t1).start();
-		new Thread(t1).start();
-		
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		new Thread(t1).start();
-		
+
+
+//		new Thread(t1).start();
+//
+//		try {
+//			TimeUnit.SECONDS.sleep(1);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//
+//		new Thread(t1).start();
+//
 	}
 }
