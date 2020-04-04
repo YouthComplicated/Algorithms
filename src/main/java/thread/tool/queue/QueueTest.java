@@ -1,4 +1,4 @@
-package thread.tool;
+package thread.tool.queue;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -88,6 +88,8 @@ public class QueueTest {
                 }
             }
         }, "AA").start();
+
+
         new Thread(() -> {
             for (int i = 1; i <= 5; i++) {
                 try {

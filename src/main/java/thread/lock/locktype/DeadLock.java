@@ -1,4 +1,4 @@
-package thread.locktype;
+package thread.lock.locktype;
 
 /**
  * 演示死锁

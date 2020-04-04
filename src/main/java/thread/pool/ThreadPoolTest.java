@@ -9,11 +9,9 @@ public class ThreadPoolTest {
 
     private final AtomicInteger atomicInteger = new AtomicInteger(1);
 
-
     private  Integer len = 1;
 
     private static int a = 0, b = 0;
-
 
     public static void main(String[] args) {
 

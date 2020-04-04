@@ -37,7 +37,7 @@ public class Demo {
 	public static void main(String[] args) {
 		Demo demo = new Demo();
 
-		CyclicBarrier barrier = new CyclicBarrier(10, new Runnable() {
+		CyclicBarrier barrier = new CyclicBarrier(11, new Runnable() {
 			@Override
 			public void run() {
 				System.out.println("好！我们开始开会...");
@@ -52,6 +52,11 @@ public class Demo {
 				}
 			}).start();
 		}
+
+		new Thread(()->{
+			System.out.println(1111);
+			demo.meeting(barrier);
+		}).start();
 
 		// 监控等待线程数
 		new Thread(new Runnable() {

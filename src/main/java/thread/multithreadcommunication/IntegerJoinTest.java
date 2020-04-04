@@ -9,6 +9,7 @@ import org.junit.Test;
 public class IntegerJoinTest {
 
     static Integer i = 0;
+
     public static class AddThread extends Thread{
         @Override
         public void run(){

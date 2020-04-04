@@ -1,6 +1,5 @@
-package thread.locktype;
+package thread.lock.locktype;
 
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 

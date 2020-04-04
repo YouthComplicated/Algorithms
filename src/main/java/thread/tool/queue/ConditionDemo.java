@@ -1,13 +1,20 @@
-package thread.base;
+package thread.tool.queue;
 
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class ShareData
-{
-    private int number = 1;//A : 1  B:2 C:3
+class ShareData {
+
+    /**
+     * A : 1  B:2 C:3
+     */
+    private int number = 1;
+
+    /**
+     * 一把锁
+     */
     private Lock lock = new ReentrantLock();
     private Condition c1 = lock.newCondition();
     private Condition c2 = lock.newCondition();
@@ -22,7 +29,9 @@ class ShareData
             while(number != 1)
             {
                 //wait.....
+                System.out.println("c1.await()......");
                 c1.await();
+                System.out.println("c1.await()1111111");
             }
             //2 干活
             for (int i = 1; i <=5; i++)
@@ -48,7 +57,9 @@ class ShareData
             while(number != 2)
             {
                 //wait.....
+                System.out.println("c2.await()......");
                 c2.await();
+                System.out.println("c2.await()111111");
             }
             //2 干活
             for (int i = 1; i <=10; i++)
@@ -74,7 +85,9 @@ class ShareData
             while(number != 3)
             {
                 //wait.....
+                System.out.println("c3.await()......");
                 c3.await();
+                System.out.println("c3.await()11111");
             }
             //2 干活
             for (int i = 1; i <=15; i++)
@@ -94,8 +107,6 @@ class ShareData
 }
 
 /**
- * @auther zzyy
- * @create 2019-04-13 13:10
  * 备注：多线程之间按顺序调用，实现A->B->C
  * 三个线程启动，要求如下：
  *
@@ -109,19 +120,19 @@ public class ConditionDemo {
         ShareData shareData = new ShareData();
 
         new Thread(() -> {
-            for (int i = 1; i <=10; i++) {
+            for (int i = 1; i <=2; i++) {
                 shareData.print5();
             }
         },"A").start();
 
         new Thread(() -> {
-            for (int i = 1; i <=10; i++) {
+            for (int i = 1; i <=2; i++) {
                 shareData.print10();
             }
         },"B").start();
 
         new Thread(() -> {
-            for (int i = 1; i <=10; i++) {
+            for (int i = 1; i <=2; i++) {
                 shareData.print15();
             }
         },"C").start();

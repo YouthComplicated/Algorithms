@@ -4,6 +4,11 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
+ *
+ *
+ * 限流处理，信号量问题
+ *
+ *
  * @author: nj
  * @date: 2020-02-06 11:26
  * @version: 0.0.1

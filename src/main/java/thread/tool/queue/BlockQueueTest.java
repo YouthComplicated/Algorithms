@@ -1,4 +1,4 @@
-package thread.tool;
+package thread.tool.queue;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -18,7 +18,10 @@ public class BlockQueueTest {
 
     BlockingQueue<String> blockingQueue2 = new SynchronousQueue<>();
 
+
     public static void main(String[] args) {
+
+
 
     }
 }
