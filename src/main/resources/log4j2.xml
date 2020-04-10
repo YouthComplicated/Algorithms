@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF" monitorInterval="60">
+    <Properties>
+        <!-- 配置日志文件输出目录,此处为项目根目录下的logs文件夹 -->
+        <Property name="LOG_HOME">logs</Property>
+        <property name="FILE_NAME">easyviews</property>
+         <property name="LOGGER_NAME">EasyViews</property>
+    </Properties>
+
+    <Appenders>
+        <!--这个输出控制台的配置-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[${LOGGER_NAME}] [%-5level] %d{YYYY-MM-dd HH:mm:ss.SSS} %logger{36}(%L) | %msg%n"/>
+        </Console>
+
+        <!--错误信息记录-->
+        <RollingRandomAccessFile name="ERROR" fileName="logs/${FILE_NAME}-error.log" filePattern="log/${FILE_NAME}-error_%d{yyyy-MM-dd}_%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="FATAL" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="[${LOGGER_NAME}] [%-5level] %d{YYYY-MM-dd HH:mm:ss.SSS} %logger{36}(%L) | %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+        <!--全部日志信息:INFO及以上级别-->
+        <RollingRandomAccessFile name="ALL" fileName="logs/${FILE_NAME}-all.log" filePattern="log/${FILE_NAME}-all%d{yyyy-MM-dd}_%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="[${LOGGER_NAME}] [%-5level] %d{YYYY-MM-dd HH:mm:ss.SSS} %logger{36}(%L) | %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+        
+        <!--性能日志信息:info及以上级别-->
+        <RollingRandomAccessFile name="PEFROMANCE" fileName="logs/${FILE_NAME}-perfromance.log" filePattern="log/${FILE_NAME}-perfromance%d{yyyy-MM-dd}_%i.log.gz">
+            <Filters>
+               <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="[${LOGGER_NAME}] [%-5level] %d{YYYY-MM-dd HH:mm:ss.SSS} %logger{36}(%L) | %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+        
+        <!--外部接口调用日志信息:info及以上级别-->
+        <RollingRandomAccessFile name="INTERFACE" fileName="logs/${FILE_NAME}-interface.log" filePattern="log/${FILE_NAME}-interface%d{yyyy-MM-dd}_%i.log.gz">
+            <Filters>
+               <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="[${LOGGER_NAME}] [%-5level] %d{YYYY-MM-dd HH:mm:ss.SSS} %logger{36}(%L) | %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+		
+		<!--操作日志信息:info及以上级别-->
+        <RollingRandomAccessFile name="OPERATE" fileName="logs/${FILE_NAME}-operate.log" filePattern="log/${FILE_NAME}-operate%d{yyyy-MM-dd}_%i.log.gz">
+            <Filters>
+               <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="[${LOGGER_NAME}] [%-5level] %d{YYYY-MM-dd HH:mm:ss.SSS} %logger{36}(%L) | %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+
+        <!--dubbo日志-->
+        <RollingRandomAccessFile name="DUBBO" fileName="logs/${FILE_NAME}-dubbo.log" filePattern="log/${FILE_NAME}-dubbo%d{yyyy-MM-dd}_%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="[${LOGGER_NAME}] [%-5level] %d{YYYY-MM-dd HH:mm:ss.SSS} %logger{36}(%L) | %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+        <!--配置异步写日志-->
+        <Async name="Async">
+            <AppenderRef ref="ALL"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <!--监控系统信息-->
+        <Logger name="performance" level="info" additivity="false">
+             <AppenderRef ref="PEFROMANCE"/>
+             <Appender-Ref ref="Console"/>
+        </Logger>
+        
+         <Logger name="interface" level="info" additivity="false">
+             <AppenderRef ref="INTERFACE"/>
+             <Appender-Ref ref="Console"/>
+        </Logger>
+        
+        <Logger name="operate" level="info" additivity="false">
+             <AppenderRef ref="OPERATE"/>
+             <Appender-Ref ref="Console"/>
+        </Logger>
+
+        <Logger name="com.alibaba.dubbo" level="ERROR" additivity="false">
+            <AppenderRef ref="DUBBO"/>
+            <Appender-Ref ref="Console"/>
+        </Logger>
+
+        <Root level="debug">
+            <Appender-Ref ref="Console"/>
+            <Appender-Ref ref="ERROR"/>
+            <Appender-Ref ref="ALL"/>
+        </Root>
+    </Loggers>
+</Configuration>
