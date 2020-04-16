@@ -65,6 +65,10 @@ public class Code_563 {
             return 0;
         }
 //        System.out.println(root.val);
+
+        /**
+         * 以下是节点的左右相加
+         */
         sum += Math.abs((root.left == null ? 0 : root.left.val)
                 - (root.right == null ? 0 : root.right.val));
         findTilt(root.left);
