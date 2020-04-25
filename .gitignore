@@ -11,3 +11,5 @@ gen
 /src/.DS_Store
 /target/
 *.class
+*/logs/
+*.data
