@@ -49,23 +49,35 @@ public class TreeNodeUtils {
             nodeList.add(arr.get(nodeIndex) == null ? null :new TreeNode(arr.get(nodeIndex)));
         }
         // 对前lastParentIndex-1个父节点按照父节点与孩子节点的数字关系建立二叉树
+        TreeNode root, left, right;
         for (int parentIndex = 0; parentIndex < arr.size() / 2 - 1; parentIndex++) {
             // 左孩子
-            nodeList.get(parentIndex).left = nodeList
-                    .get(parentIndex * 2 + 1);
-            // 右孩子
-            nodeList.get(parentIndex).right = nodeList
-                    .get(parentIndex * 2 + 2);
+            root = nodeList.get(parentIndex);
+            if(root == null){
+                continue;
+            }
+            left = nodeList.get(parentIndex * 2 + 1);
+            right = nodeList.get(parentIndex * 2 + 2);
+            root.left = left;
+            root.right = right;
+
+//            System.out.println("root:" + root.val + " left:" + (left == null ? null : left.val) + " right:" +
+//                    (right == null ? null : right.val));
+
         }
         // 最后一个父节点:因为最后一个父节点可能没有右孩子，所以单独拿出来处理
         int lastParentIndex = arr.size() / 2 - 1;
         // 左孩子
-        nodeList.get(lastParentIndex).left = nodeList
-                .get(lastParentIndex * 2 + 1);
+        if(nodeList.get(lastParentIndex) != null){
+            nodeList.get(lastParentIndex).left = nodeList
+                    .get(lastParentIndex * 2 + 1);
+        }
+
         // 右孩子,如果数组的长度为奇数才建立右孩子
         if (arr.size() % 2 == 1) {
-            nodeList.get(lastParentIndex).right = nodeList
-                    .get(lastParentIndex * 2 + 2);
+            if(nodeList.get(lastParentIndex) != null){
+                nodeList.get(lastParentIndex).right = nodeList.get(lastParentIndex * 2 + 2);
+            }
         }
 
         return nodeList == null ? null : nodeList.get(0);

@@ -1,5 +1,10 @@
 package leetcode;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * @author: nj
  * @date: 2020-04-29 21:02
@@ -45,5 +50,29 @@ public class Code_893 {
      * 1 <= A[i].length <= 20
      * All A[i] have the same length.
      * All A[i] consist of only lowercase letters.
+     *
+     *
+     *
+     *
+     *   [0-25]偶数   [26-51]奇数   题目默认给出一个单词，会把所有的组合给列举过来
+     *
      */
+
+
+    public int numSpecialEquivGroups(String[] A) {
+        Set<String> seen = new HashSet();
+        for (String S: A) {
+            int[] count = new int[52];
+            for (int i = 0; i < S.length(); ++i)
+                count[S.charAt(i) - 'a' + 26 * (i % 2)]++;
+            seen.add(Arrays.toString(count));
+        }
+        return seen.size();
+    }
+
+
+    public static void main(String[] args) {
+
+
+    }
 }
