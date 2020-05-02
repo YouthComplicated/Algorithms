@@ -11,7 +11,10 @@ public class ClassA {
 
     private Integer age;
 
+    protected Integer number = 1111111;
+
     public ClassA() {
+        System.out.println("ClassA default constructors.......");
     }
 
     public ClassA(String name, Integer age) {
@@ -43,11 +46,19 @@ public class ClassA {
         this.age = age;
     }
 
+
+    public ClassA(String name, Integer age, Integer number) {
+        this.name = name;
+        this.age = age;
+        this.number = number;
+    }
+
     @Override
     public String toString() {
         return "ClassA{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", number=" + number +
                 '}';
     }
 }
