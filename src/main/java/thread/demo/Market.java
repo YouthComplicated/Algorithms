@@ -70,7 +70,7 @@ public class Market {
         //线程池
         ExecutorService threadPool = Executors.newCachedThreadPool();
         //模拟20个用户买票
-        for(int i = 0; i < 100 ;i ++) {
+        for(int i = 0; i < 20 ;i ++) {
             //去买票
             threadPool.execute(new SemaphoreRunnable(semaphore,(i+1)));
         }

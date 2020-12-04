@@ -30,5 +30,10 @@ public class TestC1 {
     public static void main(String[] args) {
         TestC1 testC1 = new TestC1();
         System.out.println(testC1.testFinally());
+
+        Integer a = 12, b = 14;
+
+        System.out.println(a.compareTo(b));
+
     }
 }

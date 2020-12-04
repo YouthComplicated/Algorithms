@@ -67,7 +67,6 @@ public class TestAtomic {
         try {
             CountDownLatch latch = new CountDownLatch(n);
             ExecutorService service = Executors.newFixedThreadPool(100);
-
             Runnable taskWrapper = () -> {
                 task.run();
                 latch.countDown();

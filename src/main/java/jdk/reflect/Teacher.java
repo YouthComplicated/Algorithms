@@ -46,7 +46,7 @@ public class Teacher<T> extends Country<T>{
 
     }
 
-    public String doSomething(int num){
+    private String doSomething(int num){
         System.out.println("+++++invoke[doSomething]++++++");
         return "tttt"+num;
     }

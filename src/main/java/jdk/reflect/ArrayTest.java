@@ -5,6 +5,13 @@ import org.junit.Test;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+
+/**
+ * java.lang.reflect.Array
+ *
+ * The {@code Array} class provides static methods to dynamically create and access Java arrays
+ *
+ */
 public class ArrayTest {
 
 
@@ -13,6 +20,10 @@ public class ArrayTest {
      */
     @Test
     public void test01() throws ClassNotFoundException {
+
+        /**
+         * 动态创建数组
+         */
         int[] array = (int [] )Array.newInstance(int.class, 3);
         System.out.println(array);
         System.out.println(Arrays.toString(array));
@@ -20,7 +31,8 @@ public class ArrayTest {
         Array.set(array, 0,11);
         System.out.println(Arrays.toString(array));
 
-//        Array.set(array, 4, "wwww");
+        //argument type mismatch
+//        Array.set(array, 1, "wwww");
 //        System.out.println(Arrays.toString(array));
 
 

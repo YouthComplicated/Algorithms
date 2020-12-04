@@ -465,6 +465,37 @@ public class TestArrayList {
         System.out.println("结果为：" + count);
     }
 
+    @Test
+    public void Test09(){
+        List<Integer> list1 = new ArrayList<>(Arrays.asList(1,2,3,4,2,5));
+        List<Integer> list2 = new ArrayList<>(Arrays.asList(1,2,3,4));
+
+//        list1.removeAll(list2);
+//        System.out.println(list1.toString());
+
+        List<Integer> list3 = list1.subList(1,3);
+        System.out.println(list3.toString());
+        //调用abstracColletion 中方法(迭代器)
+//        list3.removeAll();
+
+
+        ArrayList<Integer> list4 = new ArrayList<>(Arrays.asList(1,2,3,4,2,5));
+        List<Integer> list = list4.subList(1, 3);
+        //内部类SubList 重写的方法
+        list.remove(0);
+        //调用的不是ArrayList,是abstractCollection,按照迭代器遍历
+//        list.removeAll(list2);
+
+        //java.lang.ClassCastException: java.util.ArrayList$SubList cannot be cast to java.util.ArrayList
+        ArrayList<Integer> list5 = (ArrayList)list;
+        list5.removeAll(list2);
+
+//        System.out.println(list3.toString());
+
+
+
+    }
+
     private List<String> createList() {
         List<String> result = new ArrayList<>();
         for (int i = 0; i < 100; i++) {

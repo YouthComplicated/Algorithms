@@ -7,6 +7,11 @@ package base.ExtendTest;
  */
 public class ClassB extends ClassA{
 
+    /**
+     * 与子类出现同名的成员
+     */
+    private String name;
+
     private String address;
 
     private Integer number = 222222;
@@ -14,12 +19,23 @@ public class ClassB extends ClassA{
     /**
      * 子类中所有的构造器默认都会访问父类中空参数的构造器
      */
-    public ClassB(){
-        //会调用父类默认的构造器
-        System.out.println("number:" + super.number);
-        System.out.println("country:");
+//    public ClassB(){
+//        //会调用父类默认的构造器
+//        System.out.println("number:" + super.number);
+//        System.out.println("country:");
+//    }
+
+    public ClassB(String address){
+        super(address);
+        this.name = "xxxx";
+        this.address = address;
+        //父子类中同名的属性使用super区分
+        this.address = super.name + name;
     }
 
+//    public ClassB(String name){
+//        super(name);
+//    }
 
     public ClassB(String name, Integer age, String address) {
         super(name, age);
@@ -27,18 +43,16 @@ public class ClassB extends ClassA{
         this.address = address;
     }
 
-    public ClassB(String name, String address) {
-//        super(name);
-        this.address = address;
-    }
+//    public ClassB(String name, String address) {
+////        super(name);
+//        this.address = address;
+//    }
 
-    public ClassB(String name, Integer age){
-        super();
-    }
+//    public ClassB(String name, Integer age){
+//        super();
+//    }
 
-    public ClassB(String name){
-        super(name);
-    }
+
 
     public ClassB(Integer age){
         super(age);
@@ -54,10 +68,12 @@ public class ClassB extends ClassA{
 
     public static void main(String[] args) {
 
-        ClassB classB = new ClassB();
+        ClassB classB = new ClassB("555");
+        System.out.println("address:" + classB.address);
         System.out.println(classB.toString());
         System.out.println("number:" + classB.number);
         System.out.println("number:"+classB.getFatherNumber());
+
 
     }
 

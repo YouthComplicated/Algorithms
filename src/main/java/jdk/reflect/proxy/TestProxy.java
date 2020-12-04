@@ -11,14 +11,20 @@ public class TestProxy {
 
     @Test
     public void test01(){
-        MyInvocationHandler myInvocationHandler = new MyInvocationHandler();
 
+
+        MyInvocationHandler myInvocationHandler = new MyInvocationHandler();
+        /**
+         * 直接创建代理类对象
+         */
         MyInterface myInterface = (MyInterface) Proxy.newProxyInstance(MyInterface.class.getClassLoader(),
                 new Class[]{MyInterface.class}, myInvocationHandler);
-
         List<String> stringList = new ArrayList<String>();
+
         myInterface.doSomething(stringList, 123);
 
+        List<String> stringList1 = new ArrayList<String>();
+        myInterface.doSomething(stringList1, 33333);
 
 
 

@@ -7,7 +7,7 @@ package base.ExtendTest;
  */
 public class ClassA {
 
-    private String name;
+    public String name;
 
     private Integer age;
 
@@ -18,6 +18,7 @@ public class ClassA {
     }
 
     public ClassA(String name, Integer age) {
+//        this();
         this.name = name;
         this.age = age;
     }
@@ -29,6 +30,14 @@ public class ClassA {
     public ClassA(Integer age) {
         this.age = age;
     }
+
+
+    public ClassA(String name, Integer age, Integer number) {
+        this.name = name;
+        this.age = age;
+        this.number = number;
+    }
+
 
     public String getName() {
         return name;
@@ -47,11 +56,6 @@ public class ClassA {
     }
 
 
-    public ClassA(String name, Integer age, Integer number) {
-        this.name = name;
-        this.age = age;
-        this.number = number;
-    }
 
     @Override
     public String toString() {
@@ -60,5 +64,9 @@ public class ClassA {
                 ", age=" + age +
                 ", number=" + number +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        ClassA classA = new ClassA("aa", 1);
     }
 }

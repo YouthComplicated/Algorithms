@@ -3,6 +3,7 @@ package thread.lock.locktype;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -95,6 +96,11 @@ public class ReadWriteLockDemo {
                 myCaChe.get(finalI + "");
             }, String.valueOf(i)).start();
         }
+
+
+        ReentrantLock lock = new ReentrantLock();
+
+//        lock.tryLock();
     }
 }
 

@@ -10,6 +10,6 @@ gen
 .DS_Store
 /src/.DS_Store
 /target/
-*.class
+#*.class
 */logs/
 *.data

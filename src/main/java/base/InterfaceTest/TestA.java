@@ -12,4 +12,8 @@ public interface TestA {
     void say();
 
     void get();
+
+    default void eat(){
+        System.out.println(11111);
+    }
 }

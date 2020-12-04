@@ -33,6 +33,8 @@ public class test {
 //        }
 
 
+        String.valueOf(1);
+
     }
 
     @Test
@@ -439,6 +441,12 @@ public class test {
 
 
     }
+
+    @Test
+    public void test28() throws UnknownHostException {
+
+    }
+
 
 
 }

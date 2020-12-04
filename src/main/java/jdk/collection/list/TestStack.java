@@ -16,4 +16,14 @@ public class TestStack {
         stack.pop();
 
     }
+
+    @Test
+    public void test02(){
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.add(2);
+        System.out.println(stack.pop());
+        stack.add(0,3);
+        System.out.println(stack.pop());
+    }
 }

@@ -6,6 +6,13 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+
+/**
+ * 获取注解的相关属性
+ *
+ * 类注解、方法参数、方法注解
+ *
+ */
 public class TestAnnotation {
 
 

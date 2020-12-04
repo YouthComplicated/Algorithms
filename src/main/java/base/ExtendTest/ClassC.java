@@ -34,4 +34,11 @@ public class ClassC extends ClassB{
     public ClassC(String name, char sex) {
         super(name);
     }
+
+    public static void main(String[] args) {
+
+//        ClassC c = new ClassC();
+
+    }
 }
+

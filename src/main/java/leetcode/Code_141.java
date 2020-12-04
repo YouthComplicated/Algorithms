@@ -78,36 +78,70 @@ public class Code_141 {
     }
 
 
+    public static ListNode reserveList(ListNode head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode prev = head;
+        ListNode curr = head.next;
+        prev.next = null;
+        while (curr != null){
+            ListNode t = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = t;
+        }
+        return prev;
+    }
+
+
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(3);
+        ListNode l1 = new ListNode(1);
         ListNode l2 = new ListNode(2);
-        ListNode l3 = new ListNode(0);
-        ListNode l4 = new ListNode(-4);
+        ListNode l3 = new ListNode(3);
+        ListNode l4 = new ListNode(4);
 
         l1.next = l2;
         l2.next = l3;
         l3.next = l4;
-        l4.next = l2;
-        System.out.println(hasCycle(l1));
-
-        ListNode l11 = new ListNode(12);
-        ListNode l21 = new ListNode(212);
-        l11.next = l21;
-        l21.next = l11;
-        System.out.println(hasCycle(l11));
+        reserveList(l1);
+        System.out.println();
 
 
-        ListNode l111 = new ListNode(12113);
-        l111.next = l111;
-        System.out.println(hasCycle(l111));
+//        ListNode l1 = new ListNode(3);
+//        ListNode l2 = new ListNode(2);
+//        ListNode l3 = new ListNode(0);
+//        ListNode l4 = new ListNode(-4);
+//
+//        l1.next = l2;
+//        l2.next = l3;
+//        l3.next = l4;
+//        l4.next = l2;
+//        System.out.println(hasCycle(l1));
 
-        ListNode a = new ListNode(12);
-        ListNode b = new ListNode(212);
-        a.next = b;
+//        ListNode l11 = new ListNode(12);
+//        ListNode l21 = new ListNode(212);
+//        l11.next = l21;
+//        l21.next = l11;
+//        System.out.println(hasCycle(l11));
+//
+//
+//        ListNode l111 = new ListNode(12113);
+//        l111.next = l111;
+//        System.out.println(hasCycle(l111));
+//
+//        ListNode a = new ListNode(12);
+//        ListNode b = new ListNode(212);
+//        a.next = b;
+//
+//        System.out.println(hasCycle(a));
 
-        System.out.println(hasCycle(a));
+
 
     }
+
+
+
 
 
 }

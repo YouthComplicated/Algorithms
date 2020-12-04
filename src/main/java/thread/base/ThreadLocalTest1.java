@@ -43,7 +43,7 @@ public class ThreadLocalTest1 {
         public void run() {
             try {
                 if(tl.get()==null){
-//                    tl.set(sdf);
+                    tl.set(sdf);
                     tl.set(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
                 }
                 Date t=tl.get().parse("2015-03-29 19:29:"+ i % 60);

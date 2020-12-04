@@ -163,9 +163,11 @@ public class MyReflect {
 
         Method method = null;
         try {
-            method = clazzA.getMethod("doSomething", new Class[] {int.class});
+//            method = clazzA.getMethod("doSomething", new Class[] {int.class});
+            method = clazzA.getDeclaredMethod("doSomething", new Class[] {int.class});
             System.out.println(method);
             printLine("getParameterTypes");
+
             Class<?>[] types = method.getParameterTypes();
             System.out.println(Arrays.toString(types));
             printLine("getReturnType");
@@ -174,6 +176,7 @@ public class MyReflect {
 
             //invoke  静态方法调用可以用null代替指定对象作为invoke()的参数
             Teacher teacher = new Teacher();
+            method.setAccessible(true);
             Object returnValue = method.invoke(teacher, 9822);
             System.out.println("返回值" + returnValue);
         } catch (NoSuchMethodException e) {
